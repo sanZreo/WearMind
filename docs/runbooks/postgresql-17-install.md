@@ -24,7 +24,7 @@
 
 | 项 | 结果 |
 |---|---|
-| winget | ✅ v1.29.380，`C:\Users\mechrevo\AppData\Local\Microsoft\WindowsApps\winget.exe` |
+| winget | ✅ v1.29.380，`C:\Users\<YOUR_USERNAME>\AppData\Local\Microsoft\WindowsApps\winget.exe` |
 | winget 源 | ✅ `msstore` + `winget` 均启用 |
 | 包识别 | ✅ `Found PostgreSQL 17 [PostgreSQL.PostgreSQL.17]`，版本 **17.11-5** |
 | 发布者 | PostgreSQL Global Development Group |
