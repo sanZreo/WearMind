@@ -1,0 +1,17 @@
+[project]
+name = "wearmind-worker"
+version = "0.1.0"
+description = "WearMind 定时任务进程（Phase 0 占位，尚未实现任务）"
+requires-python = ">=3.12,<3.14"
+
+# Phase 0 不引入 APScheduler：本进程目前只做启动说明并退出。
+# 真正的调度器在 Phase 5（每日穿搭建议）才需要，
+# 届时在此处加入 "apscheduler>=3.11,<4" 即可。
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["wearmind_worker"]

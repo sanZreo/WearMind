@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/*
+ * 字体策略：直接使用系统字体栈，不使用 next/font/google。
+ *
+ * 原因有两条：
+ * 1. next/font/google 在构建期需要访问 fonts.googleapis.com 下载字体文件，
+ *    本机网络环境（代理）无法访问，会导致 `next build` 直接失败；
+ * 2. Geist 等西文字体不含中文字形，中文界面最终仍会回落到系统中文字体，
+ *    引入反而增加构建负担。
+ */
+@theme {
+  --font-sans: system-ui, -apple-system, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas,
+    "Courier New", monospace;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

@@ -1,0 +1,44 @@
+[project]
+name = "wearmind"
+version = "0.1.0"
+description = "WearMind — AI 个人穿搭顾问（monorepo workspace 根）"
+requires-python = ">=3.12,<3.14"
+
+# 根项目不打包、不发布，只作为 uv workspace 锚点。
+# 显式依赖两个成员：这样一条 `uv sync` 就能装齐所有依赖，
+# 无需记忆 `--all-packages` 之类的额外参数。
+dependencies = [
+    "wearmind-api",
+    "wearmind-worker",
+]
+
+[tool.uv]
+package = false
+
+# 依赖来源固定为官方 PyPI（已验证可达），不写死国内镜像。
+# 若日后安装较慢，可在本机 ~/.config/uv/uv.toml 配置镜像，
+# 而不是把它固化进项目配置 —— 避免不同机器解析出不同来源。
+
+# 开发工具统一放在 workspace 根：`uv sync` 默认就包含 dev 组，
+# 因此一条命令即可装齐运行 + 测试所需依赖。
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.9",
+    "httpx2>=0.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["apps/api/tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.uv.sources]
+wearmind-api = { workspace = true }
+wearmind-worker = { workspace = true }
+
+[tool.uv.workspace]
+members = ["apps/api", "apps/worker"]

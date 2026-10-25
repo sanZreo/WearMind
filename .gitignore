@@ -1,0 +1,140 @@
+# =====================================================================
+# WearMind .gitignore
+# 原则：只忽略"产物 / 缓存 / 凭据 / 大文件"，绝不忽略源代码目录。
+# 修改本文件后必须用 `git check-ignore -v <path>` 复验，详见
+# docs/reports/2026-10-25-phase2.5-git-baseline-and-secrets.md
+# =====================================================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 虚拟环境（uv 默认在仓库根创建 .venv）
+.venv/
+venv/
+env/
+ENV/
+
+# 测试与类型检查缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# ---------- Node / Next.js ----------
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+# Next.js 16 默认忽略；`next build` / `next dev` 会自动重建
+next-env.d.ts
+.eslintcache
+.stylelintcache
+
+# ---------- 环境变量与密钥 ----------
+# 只保留模板；任何真实 .env 一律不入库
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+secrets.json
+credentials.json
+service-account*.json
+*.htpasswd
+# 包管理器凭据（可能内嵌 token）。若需提交无 token 的版本，用 `git add -f`
+.npmrc
+.pypirc
+# PostgreSQL 客户端密码文件
+.pgpass
+pgpass.conf
+
+# SSH 私钥（含无扩展名形式）
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+id_ecdsa
+id_ecdsa.*
+
+# ---------- 运行期数据（本地数据库、上传图片、日志） ----------
+# var/* 而非 var/：忽略目录内所有内容，但允许提交 var/.gitkeep 占位
+var/*
+!var/.gitkeep
+*.sqlite
+*.sqlite3
+*.db
+*.log
+logs/
+
+# ---------- 数据库备份（含真实业务数据，禁止入库） ----------
+# 严格限定为备份/导出形态，不用裸 `*.sql`，
+# 以免误伤将来手工编写的迁移脚本或种子数据。
+/backups/
+/backup/
+/dumps/
+/dump/
+*.dump
+*.pgdump
+*.backup
+*.sql.gz
+*.sql.bz2
+/*.sql
+
+# ---------- 模型权重文件（大体积，禁止入库） ----------
+*.gguf
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.tflite
+*.mlmodel
+*.bin
+# 注意必须写成 /models/（仅根目录）。
+# 写成 models/ 会匹配任意层级的同名目录，把 apps/api/app/models/（ORM 模型）一并忽略掉。
+/models/
+
+# ---------- 大型生成文件（导出物 / 归档包） ----------
+/artifacts/
+/exports/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# ---------- 编辑器与系统 ----------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+*.tmp
+
+# ---------- 笔记本检查点 ----------
+.ipynb_checkpoints/
+
+# ---------- 工具运行记录（非项目产物） ----------
+.workbuddy/
